@@ -1,12 +1,29 @@
 package unitec.elementosmvc;
 
+import java.time.LocalDate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ElementosMvcApplication {
+public class ElementosMvcApplication implements CommandLineRunner{
 
-	public static void main(String[] args) {
+    //Para inyectar dependencias
+    @Autowired ServicioTarjeta servicio;
+    @Autowired RepositorioMensaje repomensa;
+    
+    
+    public static void main(String[] args) {
 		SpringApplication.run(ElementosMvcApplication.class, args);
+                
+               
 	}
+
+    @Override
+    public void run(String... args) throws Exception {
+         servicio.obtenerSaldo().obtenerSaldo();
+         LocalDate fecha = LocalDate.now();
+         repomensa.save(new Mensaje("Chilo",fecha));
+    }
 }
