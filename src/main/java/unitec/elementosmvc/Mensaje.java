@@ -14,6 +14,8 @@ public class Mensaje {
     private String id;
     private String cuerpo;
     private LocalDate fecha;
+    
+    
 
     public Mensaje(String cuerpo, LocalDate fecha) {
         this.cuerpo = cuerpo;
@@ -21,6 +23,12 @@ public class Mensaje {
     }
 
     public Mensaje() {
+    }
+
+    public Mensaje(String id, String cuerpo, LocalDate fecha) {
+        this.id = id;
+        this.cuerpo = cuerpo;
+        this.fecha = fecha;
     }
     
 
