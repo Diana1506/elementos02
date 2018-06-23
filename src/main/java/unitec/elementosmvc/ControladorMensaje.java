@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,4 +53,38 @@ public class ControladorMensaje {
          estatus.setMensaje("Mensaje guardado con exito!!");
          return estatus; 
     }
+    
+    
+    //caso d) actualizar
+    
+    @PutMapping("/mensaje")
+    public Estatus actualizar(@RequestBody String json) throws Exception {
+    
+        //primero convertimos este String llamado json a un objeto java
+        ObjectMapper maper = new ObjectMapper();
+         Mensaje mensa = maper.readValue(json, Mensaje.class);
+         
+         repoMensa.save(mensa);
+         
+         System.out.println("Este Objeto se Convirtio: "+mensa);
+         Estatus estatus = new Estatus();
+         estatus.setSuccess(true);
+         estatus.setMensaje("Mensaje guardado con exito!!");
+         return estatus; 
+    }
+    
+    @DeleteMapping("/mensaje/{id}")
+    public Estatus borrarPorId(@PathVariable String id){//String es el tipo de dato del ID
+        Mensaje mensa = new Mensaje();
+        
+        repoMensa.deleteById(id);
+        
+        Estatus e = new Estatus();
+        e.setSuccess(true);
+        e.setMensaje("Mensaje borrado");
+        return e;
+        
+  
+    }
+    
 }
