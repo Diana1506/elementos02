@@ -13,7 +13,7 @@ public class ElementosMvcApplication implements CommandLineRunner {
     @Autowired
     ServicioTarjeta servicio;
     @Autowired
-    RepositorioMensaje repomensa;
+    RepositorioMensaje repomensa; 
 
     public static void main(String[] args) {
         SpringApplication.run(ElementosMvcApplication.class, args);
